@@ -1,0 +1,20 @@
+$VB-input-BgColor:#BFC1FD;
+$VB-button-TexColor:#000;
+$VB-button-BgColor:#E1E0E6;
+
+.margin-up{
+    margin-top: 25px;
+}
+.VB-button{
+    background-color: #BFC1FD;
+    color: $VB-button-TexColor;
+    text-transform: capitalize;
+    margin-left: 10px;
+    margin-top: 25px;
+}
+.VB-input{
+    background-color: $VB-input-BgColor;
+    &:focus{
+        background-color: $VB-input-BgColor;
+    }
+}

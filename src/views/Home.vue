@@ -1,18 +1,35 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <orpos />
+      </div>
+      <div class="col">
+        <total /> 
+      </div>
+      <div class="col">
+        <close />
+      </div>
+    </div>
+    <div class="row">
+      table
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import orpos from '../components/orpos.vue';
+import total from '../components/total.vue'
+import close from '../components/close.vue'
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  components:{
+    orpos,
+    total,
+    close
   }
 }
 </script>
+
+<style lang="sss" scoped>
+
+</style>
