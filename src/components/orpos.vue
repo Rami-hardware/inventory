@@ -1,45 +1,49 @@
 <template>
     <div>
         <form method="post" action="/orpos">
-       <b-form-group v-slot="{ ariaDescribedby }">
-      <b-form-checkbox-group
-        id="checkbox-group-2"
-        v-model="selected"
-        :aria-describedby="ariaDescribedby"
-        name="flavour-2"
-      >
-        <b-form-checkbox value="orange">pos no. mode</b-form-checkbox>
-        <b-form-checkbox value="apple">pos no. wth training</b-form-checkbox>
-        <b-form-checkbox value="pineapple">training only</b-form-checkbox>
-      </b-form-checkbox-group>
-    </b-form-group>
-        <input type='checkbox' name="POS_No" /> pos no. mode
-        <input type='checkbox' name="POS_Not" /> pos no. wth training
-        <input type='checkbox' name="training" /> training only
-        <label> store 
-            <input type="text" name = "store">
-        </label>
-            <label> brand 
-            <input type="text" name = "brand">
-        </label>
-            <label> mall 
-            <input type="text" name = "mall">
-        </label>
-            <label> s\c 
-            <input type="text" name = "sc">
-        </label>
-            <label> pos type 
-            <input type="text" name = "pos_type">
-        </label>
-            <label> span 
-            <input type="text" name = "span">
-        </label>
-            <label> region 
-            <input type="text" name = "region">
-        </label>
-        <b-button>connectivity</b-button>
-        <b-button>exports</b-button>
-        <b-button>search</b-button>
+        <!--Checkboxes-->
+        <b-form-checkbox class="one-line">pos no. mode</b-form-checkbox>
+        <b-form-checkbox class="one-line">pos no. wth training</b-form-checkbox>
+        <b-form-checkbox class="one-line">training only</b-form-checkbox>
+        <!--Checkboxes-->
+        <!--store-->
+        <b-input-group  prepend="store" class="margin-up">
+            <b-form-input v-model="text"  class="VB-input" placeholder="Enter store name"></b-form-input>
+        </b-input-group>
+        <!--store-->
+        <!--brand-->
+        <b-input-group  prepend="brand" class="margin-up">
+          <b-form-input v-model="text" class="VB-input" placeholder="Enter brand name"></b-form-input>
+        </b-input-group>
+        <!--brand-->
+        <!--mall-->
+        <b-input-group  prepend="mall" class="margin-up">
+          <b-form-input list="my-list-id" class="VB-input" placeholder="enter mall name"></b-form-input>
+        </b-input-group>
+        <!--mall-->
+        <!--S\C-->
+        <b-input-group  prepend="s\c" class="margin-up">
+          <b-form-input list="my-list-id" class="VB-input" placeholder="enter s\c name"></b-form-input>
+        </b-input-group>
+        <!--S\C-->
+        <!--pos type-->
+        <b-input-group  prepend="postype" class="margin-up">
+          <b-form-input list="my-list-id" class="VB-input" placeholder="enter postype name"></b-form-input>
+        </b-input-group>
+        <!--pos type-->
+        <!--span-->
+        <b-input-group  prepend="span" class="margin-up">
+          <b-form-input list="my-list-id" class="VB-input" placeholder="enter span name"></b-form-input>  
+        </b-input-group>
+        <!--span-->
+        <!--region-->
+        <b-input-group  prepend="region" class="margin-up">
+          <b-form-input list="my-list-id" class="VB-input" placeholder="enter region name"></b-form-input>
+        </b-input-group>
+        <!--region-->
+        <b-button class="VB-button">connectivity</b-button>
+        <b-button class="VB-button">exports</b-button>
+        <b-button class="VB-button">search</b-button>
         </form>
     </div>
 </template>
@@ -61,3 +65,9 @@ export default {
   }
 
 </script>
+<style lang="scss" scoped>
+.one-line{
+  float: left;
+  padding-left: 10px;
+}
+</style>

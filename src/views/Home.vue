@@ -12,20 +12,22 @@
       </div>
     </div>
     <div class="row">
-      table
+      <record />
     </div>
   </div>
 </template>
 
 <script>
-import orpos from '../components/orpos.vue';
-import total from '../components/total.vue'
-import close from '../components/close.vue'
+import orpos from '@/components/orpos.vue';
+import total from '@/components/total.vue'
+import close from '@/components/close.vue'
+import record from '../components/record.vue'
 export default {
   components:{
     orpos,
     total,
-    close
+    close,
+    record
   }
 }
 </script>

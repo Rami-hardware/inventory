@@ -6,15 +6,19 @@ $VB-button-BgColor:#E1E0E6;
     margin-top: 25px;
 }
 .VB-button{
-    background-color: #BFC1FD;
-    color: $VB-button-TexColor;
+    background-color: $VB-button-BgColor !important;
+    color: $VB-button-TexColor !important;
     text-transform: capitalize;
     margin-left: 10px;
     margin-top: 25px;
 }
 .VB-input{
-    background-color: $VB-input-BgColor;
+    background-color: $VB-input-BgColor !important;
     &:focus{
-        background-color: $VB-input-BgColor;
+        background-color: $VB-input-BgColor !important;
     }
 }
+.one-line{
+    float: left;
+    padding-left: 10px;
+  }

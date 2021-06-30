@@ -6,7 +6,7 @@
                 <template #prepend>
                     <b-input-group-text >from</b-input-group-text>
                 </template>
-            <b-form-datepicker id="example-datepicker" v-model="value" class="date"></b-form-datepicker>
+            <b-form-datepicker id="example-datepicker"></b-form-datepicker>
             </b-input-group>
             <!--Date [From]-->
             <!--Date [to] -->
@@ -14,7 +14,7 @@
                 <template #prepend>
                     <b-input-group-text >to</b-input-group-text>
                 </template>
-                <b-form-datepicker id="example-datepicker" v-model="value" class="date"></b-form-datepicker>
+                <b-form-datepicker id="example-datepicker"></b-form-datepicker>
             </b-input-group>
             <!--Date [to] -->
             <!--Brand-->
