@@ -1,6 +1,6 @@
 //all reqrie i need
 const fs = require("fs")
-const mysql = require("mysql2")
+const oracledb = require("oracledb")
 const express = require('express')
 const path = require('path')
 let cors = require('cors')
@@ -14,21 +14,6 @@ port = 5050;
 
 //allow to pass JSON in body
 app.use(bodyParser.json());
-
-//mySQL Connection
-let con = mysql.createConnection({
-    host:"localhost",
-    user:"root",
-    password: '',
-    database:"invetory"
-})
-
-//Chacking mySQL + records display in console
-con.connect((err) =>{
-    if(err) throw err
-    console.log('connected')
-})
-
 //show JSON File
 let loadJSON = (filename) => {
     return JSON.parse(fs.readFileSync(filename)) ? JSON.parse(fs.readFileSync(filename).toString())  : 'null'
@@ -39,11 +24,28 @@ let saveJSON = (filename , json) =>{
     return fs.writeFileSync(filename,JSON.stringify(json))
 }
 
-//save & show all records
- con.query("select * from Persons;", (err, result) => {
-    if(err) throw err
-    saveJSON("records.json" , result)
-})
+//save & show all records & Oracle DB connction 
+async function run(){
+    let connection;
+try {
+    connection =  await oracledb.getConnection({ 
+        user: "INV_WEST", 
+        password: "ITWEST", 
+        connectionString: "10.64.71.100/orcl" 
+    });
+    console.log("Successfully connected to Oracle Database");
+    sql = `SELECT * FROM orpos`;
+    result = await connection.execute(sql,
+        [],
+        {outFormat: oracledb.OBJECT }
+        );
+    saveJSON("records.json" , result.rows)
+}catch(err){
+console.error("Error connecting to Oracle " + err)
+}
+}
+
+run();
 
 //passing JSON File to Vue
 app.get('/', (req, res) => {

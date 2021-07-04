@@ -1,7 +1,7 @@
 <template>
     <div>
       <router-link to="/">orpos</router-link> |
-      <router-link to="/htt">htt</router-link> |
+      <router-link to="/close">close</router-link> |
       <router-link to="/about">lcw</router-link> |
       <router-link to="/about">infintty</router-link> |
       <router-link to="/about">promod</router-link> |

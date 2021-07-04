@@ -1,16 +1,51 @@
 <template>
     <div>
-    <b-table 
-          id="my-table"
+ <b-container fluid>
+    <!-- User Interface controls -->
+
+      
+
+      <b-col lg="6" class="my-1">
+        <b-form-group
+          label=""
+          label-for="filter-input"
+          label-cols-sm="3"
+          label-align-sm="right"
+          label-size="sm"
+          class="mb-0"
+        >
+          <b-input-group size="sm">
+            <b-form-input
+              id="filter-input"
+              v-model="keyword"
+              type="search"
+              placeholder="Type to Search"
+            ></b-form-input>
+
+            <b-input-group-append>
+              <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+            </b-input-group-append>
+          </b-input-group>
+        </b-form-group>
+      </b-col>
+
+    <!-- Main table element -->
+    <b-table
       :items="items"
-      :per-page="perPage"
+      :fields="fields"
       :current-page="currentPage"
-      small></b-table>
-    <b-pagination       
-       v-model="currentPage"
-      :total-rows="rows"
       :per-page="perPage"
-      aria-controls="my-table"></b-pagination>
+      :filter="filter"
+      :filter-included-fields="filterOn"
+      :sort-by.sync="sortBy"
+      :sort-desc.sync="sortDesc"
+      :sort-direction="sortDirection"
+      stacked="md"
+      show-empty
+      small
+      @filtered="onFiltered"
+    ></b-table>
+  </b-container>
     </div>
 </template>
 
@@ -20,9 +55,10 @@ export default {
     name:"record",
     data(){
         return{
-            perPage: 5,
+            perPage: 3,
             currentPage:1,
-            items : []
+            items : [],
+            keyword:''
         }
     },
     methods:{
@@ -36,7 +72,22 @@ export default {
     computed: {
       rows() {
         return this.items.length
-      }
+      },
+      sortOptions() {
+        // Create an options list from our fields
+        return this.fields
+          .filter(f => f.sortable)
+          .map(f => {
+            return { text: f.label, value: f.key }
+          }),
+      
     }
 }
+
 </script>
+<style lang="scss" scoped> 
+.table{
+    text-transform: lowercase !important;
+    
+}
+</style>
