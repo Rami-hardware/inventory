@@ -1,13 +1,10 @@
 <template>
-    <div>
- <b-container fluid>
+  <b-container fluid>
     <!-- User Interface controls -->
-
-      
+    <b-row>
 
       <b-col lg="6" class="my-1">
         <b-form-group
-          label=""
           label-for="filter-input"
           label-cols-sm="3"
           label-align-sm="right"
@@ -17,18 +14,14 @@
           <b-input-group size="sm">
             <b-form-input
               id="filter-input"
-              v-model="keyword"
+              v-model="filter"
               type="search"
               placeholder="Type to Search"
             ></b-form-input>
-
-            <b-input-group-append>
-              <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
-            </b-input-group-append>
           </b-input-group>
         </b-form-group>
       </b-col>
-
+    </b-row>
     <!-- Main table element -->
     <b-table
       :items="items"
@@ -37,16 +30,26 @@
       :per-page="perPage"
       :filter="filter"
       :filter-included-fields="filterOn"
-      :sort-by.sync="sortBy"
-      :sort-desc.sync="sortDesc"
-      :sort-direction="sortDirection"
       stacked="md"
       show-empty
       small
       @filtered="onFiltered"
-    ></b-table>
+      striped
+      bordered
+      outlined
+      hover
+      noCollapse>
+    </b-table>
+    
+<div class="overflow-auto">
+    <b-pagination
+      v-model="currentPage"
+      :total-rows="rows"
+      :per-page="perPage"
+      aria-controls="my-table"
+    ></b-pagination>
+</div>
   </b-container>
-    </div>
 </template>
 
 <script>
@@ -55,11 +58,13 @@ export default {
     name:"record",
     data(){
         return{
-            perPage: 3,
+            perPage: 5,
             currentPage:1,
             items : [],
-            keyword:''
-        }
+            filter: null,
+            filterOn: [],
+      }
+
     },
     methods:{
         get(){
@@ -68,20 +73,14 @@ export default {
     },
     mounted(){
         this.get();
+        this.totalRows = this.items.length;
     },
     computed: {
       rows() {
         return this.items.length
       },
-      sortOptions() {
-        // Create an options list from our fields
-        return this.fields
-          .filter(f => f.sortable)
-          .map(f => {
-            return { text: f.label, value: f.key }
-          }),
-      
-    }
+    },
+
 }
 
 </script>

@@ -1,10 +1,12 @@
 //all reqrie i need
 const fs = require("fs")
-const oracledb = require("oracledb")
+//const oracledb = require("oracledb")
 const express = require('express')
 const path = require('path')
 let cors = require('cors')
 let bodyParser = require("body-parser");
+const mysql = require('mysql2')
+var tcpp = require('tcp-ping');
 
 //using Experss libaray
 let app = express()
@@ -25,33 +27,42 @@ let saveJSON = (filename , json) =>{
 }
 
 //save & show all records & Oracle DB connction 
-async function run(){
-    let connection;
-try {
-    connection =  await oracledb.getConnection({ 
-        user: "INV_WEST", 
-        password: "ITWEST", 
-        connectionString: "10.64.71.100/orcl" 
-    });
-    console.log("Successfully connected to Oracle Database");
-    sql = `SELECT * FROM orpos`;
-    result = await connection.execute(sql,
-        [],
-        {outFormat: oracledb.OBJECT }
-        );
-    saveJSON("records.json" , result.rows)
-}catch(err){
-console.error("Error connecting to Oracle " + err)
-}
-}
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: `invetory`
+});
 
-run();
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+});
+
+con.connect(function(err) {
+    if (err) throw err;
+    con.query("select   * from persons", function (err, result, fields) {
+      if (err) throw err;
+      saveJSON('records.json',result);
+    });
+  });
 
 //passing JSON File to Vue
 app.get('/', (req, res) => {
     console.log('api/users called!')
     res.json(loadJSON("records.json"));
   });
+
+
+tcpp.probe('localhost', 80, function(err, available) {
+    console.log(available);
+});
+
+tcpp.ping({ address: 'localhost' }, function(err, data) {
+    if(err) throw err
+    console.log("local host pinged ");
+});
+
 //Lanching backend on browser
 app.listen(port, () => {
     console.log(`Server listening on the port::${port}`);
